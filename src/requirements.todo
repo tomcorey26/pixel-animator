@@ -1,0 +1,19 @@
+Description:
+User can create each frame for an animation and then run it
+
+Fill in cells for animation
+Go forward and backword to previous animations
+Plan:
+  Create array of Grids
+  Each time create new frame button is clicked a new one is spawned
+  added to array and 
+  Maybe have old frame show with low opacity for cells
+  use previous frame button?
+
+Grid State
+*************
+state/type
+currentColor : hex color
+currentFrame : number
+isGuest: boolean
+
