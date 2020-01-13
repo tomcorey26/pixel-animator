@@ -10,6 +10,20 @@ Plan:
   Maybe have old frame show with low opacity for cells
   use previous frame button?
 
+Features
+**********
+Fill in frames by holding down mouse
+Toggle Grid / without Grid
+Fill With previous frame
+Add your own sound
+
+Components
+*********** 
+Seperate Grid into :
+AnimationCreator
+Grid
+
+
 Grid State
 *************
 state/type

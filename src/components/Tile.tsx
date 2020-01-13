@@ -2,14 +2,24 @@ import React, { useState } from "react";
 
 interface Props {
   isFilled: string;
-  onClick: () => void;
+  onMouseOver: () => void;
+  onMouseDown: () => void;
+  onMouseUp: () => void;
   color: string;
 }
 
-const Tile: React.FC<Props> = ({ onClick, isFilled, color }) => {
+const Tile: React.FC<Props> = ({
+  onMouseOver,
+  isFilled,
+  color,
+  onMouseDown,
+  onMouseUp
+}) => {
   return (
     <div
-      onClick={onClick}
+      onMouseOver={onMouseOver}
+      onMouseDown={onMouseDown}
+      onMouseUp={onMouseUp}
       style={{
         width: 20,
         height: 20,
