@@ -9,7 +9,7 @@ const numCols = 20;
 const createGrid = (numRows: number, numCols: number) => {
   const rows = [];
   for (let i = 0; i < numRows; i++) {
-    rows.push(Array.from(Array(numCols), () => 0));
+    rows.push(Array.from(Array(numCols), () => "#ffffff"));
   }
   return rows;
 };
@@ -20,10 +20,12 @@ const Grid: React.FC = () => {
     return createGrid(numRows, numCols);
   });
   const [running, setRunning] = useState(false);
+  const [globalColor, setGlobalColor] = useState("#ffffff");
 
   const handleTileClick = (i: number, k: number) => {
-    const newGrid = produce(grid, gridCopy => {
-      gridCopy[i][k] = grid[i][k] ? 0 : 1;
+    const newGrid: any = produce(grid, gridCopy => {
+      console.log(globalColor);
+      gridCopy[i][k] = grid[i][k] !== "#ffffff" ? "#ffffff" : globalColor;
     });
     setGrid(newGrid);
   };
@@ -31,6 +33,10 @@ const Grid: React.FC = () => {
   const createNewFrame = () => {
     setFrames([...frames, grid]);
     setGrid(createGrid(numRows, numCols));
+  };
+
+  const handleColorChange = (event: any) => {
+    setGlobalColor(event.target.value);
   };
 
   return (
@@ -42,6 +48,15 @@ const Grid: React.FC = () => {
       >
         Next Frame
       </button>
+
+      <input
+        type="color"
+        id="color"
+        name="head"
+        value={globalColor}
+        onChange={handleColorChange}
+      />
+
       <div
         style={{
           display: "grid",
@@ -53,9 +68,8 @@ const Grid: React.FC = () => {
             <Tile
               key={`${i}-${k}`}
               isFilled={grid[i][k]}
-              i={i}
-              k={k}
               onClick={() => handleTileClick(i, k)}
+              color={grid[i][k]}
             />
           ))
         )}
