@@ -1,6 +1,7 @@
-import React, { useState, useCallback, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import produce from "immer";
 
+import Point from "../interfaces/Point";
 import Tile from "./Tile";
 
 const numRows = 20;
@@ -22,8 +23,9 @@ const Grid: React.FC = () => {
   const [running, setRunning] = useState(false);
   const [globalColor, setGlobalColor] = useState("#ffffff");
   const [isMouseDown, setMouseDown] = useState<boolean>(false);
+  const [hoverTileCoords, setHoverTileCoords] = useState<Point | null>(null);
 
-  const handleTileClick = (i: number, k: number) => {
+  const handleTileHold = (i: number, k: number) => {
     if (isMouseDown) {
       const newGrid: any = produce(grid, gridCopy => {
         console.log(globalColor);
@@ -50,6 +52,14 @@ const Grid: React.FC = () => {
   const handleColorChange = (event: any) => {
     setGlobalColor(event.target.value);
   };
+
+  useEffect(() => {
+    if (hoverTileCoords !== null) {
+      handleTileHold(hoverTileCoords.x, hoverTileCoords.y);
+    }
+
+    return;
+  }, [isMouseDown, hoverTileCoords]);
 
   return (
     <>
@@ -88,7 +98,7 @@ const Grid: React.FC = () => {
             <Tile
               key={`${i}-${k}`}
               isFilled={grid[i][k]}
-              onMouseOver={() => handleTileClick(i, k)}
+              onMouseOver={() => setHoverTileCoords({ x: i, y: k })}
               onMouseDown={() => setMouseDown(true)}
               onMouseUp={() => setMouseDown(false)}
               color={grid[i][k]}
