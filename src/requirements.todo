@@ -21,6 +21,9 @@ Components
 *********** 
 Seperate Grid into :
 AnimationCreator
+Animation
+  Gets passed down the frames of the animation
+  shows on click?
 Grid
 
 

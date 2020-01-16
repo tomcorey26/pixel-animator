@@ -1,8 +1,8 @@
 import React from "react";
-import Grid from "./components/Grid";
+import AnimationCreator from "./components/AnimationCreator";
 
 const App: React.FC = () => {
-  return <Grid />;
+  return <AnimationCreator />;
 };
 
 export default App;
