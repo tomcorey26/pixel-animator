@@ -73,51 +73,36 @@ const AnimationCreator: React.FC = () => {
   const isBackwardShowing = frameIdx !== 0;
   return (
     <>
-      <h1>Current Frame {frameIdx}</h1>
-      <button
-        onClick={() => {
-          createNewFrame();
-        }}
+      <h2>Current Frame {frameIdx + 1}</h2>
+      <h3> Frame Count {frames.length}</h3>
+      <div
+        className="back-forward"
+        style={{ display: "flex", justifyContent: "space-between" }}
       >
-        Next Frame
-      </button>
+        {isBackwardShowing && !runningRef.current ? (
+          <button
+            onClick={() => {
+              setFrameIdx(prev => (prev -= 1));
+            }}
+          >
+            Previous Frame
+          </button>
+        ) : (
+          <div></div>
+        )}
 
-      <button
-        onClick={() => {
-          fillWithColor();
-        }}
-      >
-        Fill
-      </button>
-
-      {isBackwardShowing && (
-        <button
-          onClick={() => {
-            setFrameIdx(prev => (prev -= 1));
-          }}
-        >
-          Backward
-        </button>
-      )}
-
-      {isForwardShowing && (
-        <button
-          onClick={() => {
-            setFrameIdx(prev => (prev += 1));
-          }}
-        >
-          Forward
-        </button>
-      )}
-
-      <input
-        type="color"
-        id="color"
-        name="head"
-        value={globalColor}
-        onChange={handleColorChange}
-      />
-
+        {isForwardShowing && !runningRef.current ? (
+          <button
+            onClick={() => {
+              setFrameIdx(prev => (prev += 1));
+            }}
+          >
+            Next Frame
+          </button>
+        ) : (
+          <div></div>
+        )}
+      </div>
       <button
         style={{ backgroundColor: "orange" }}
         onClick={() => {
@@ -128,8 +113,31 @@ const AnimationCreator: React.FC = () => {
           }
         }}
       >
-        Play Animation
+        {runningRef.current ? "Pause " : "Play "}Animation
       </button>
+      <button
+        onClick={() => {
+          createNewFrame();
+        }}
+      >
+        Create New Frame
+      </button>
+
+      <button
+        onClick={() => {
+          fillWithColor();
+        }}
+      >
+        Fill
+      </button>
+
+      <input
+        type="color"
+        id="color"
+        name="head"
+        value={globalColor}
+        onChange={handleColorChange}
+      />
 
       <>
         <Grid
