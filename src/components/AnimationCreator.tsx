@@ -139,6 +139,16 @@ const AnimationCreator: React.FC = () => {
         onChange={handleColorChange}
       />
 
+      <form style={{ display: "inline-block" }}>
+        <select onChange={e => setFrameIdx(Number(e.target.value))}>
+          {frames.map((frame, i) => (
+            <option key={i} value={i} selected={i === frameIdx ? true : false}>
+              {i + 1}
+            </option>
+          ))}
+        </select>
+      </form>
+
       <>
         <Grid
           grid={frames[frameIdx]}

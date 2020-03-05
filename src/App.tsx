@@ -1,5 +1,6 @@
 import React from "react";
 import AnimationCreator from "./components/AnimationCreator";
+import "./styles.scss";
 
 const App: React.FC = () => {
   return (
